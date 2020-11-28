@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--Frontend code is based on Guestbook frontend in Sec 4.3-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DMI-Parking</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="page">
+        <h1>DMI-Parking</h1>
+        <h2>Purchase Parking Voucher</h2>
+        <div>
+            <div>
+                <label for="name">Name: </label>
+                <input id="name" type="text" name="name">
+            </div>
+            <div>
+                <label for="email">Email: </label>
+                <input id="email" type="text" name="email">
+            </div>
+            <div>
+                <label for="PlateNumber">Plate Number: </label>
+                <input id="PlateNumber" type="text" name="plate number">
+            </div>
+            <div>
+                <label for="time">Time: </label>
+                <select name="time" id="time">
+                    <optgroup label="Time in minutes">
+                        <option value="900">0:15</option>
+                        <option value="1800">0:30</option>
+                        <option value="2700">0:45</option>
+                        <option value="3600">1:00</option>
+                        <option value="4500">1:15</option>
+                        <option value="5400">1:30</option>
+                        <option value="6300">1:45</option>
+                        <option value="7200">2:00</option>
+                    </optgroup>
+                </select>
+            </div>
+            <button id="purchase">Purchase</button>
+        </div>
+        <h2>Look Up Voucher</h2>
+        <div>
+            <button id="LookUpWallet">Look Up Wallet</button>
+            <div>
+                <label for="PlateLookUp">Plate Number: </label>
+                <input id="PlateLookUp" type="text" name="plate look up">
+            </div>
+            <button id="LookUpPlate">Look up plate</button>
+            <div id="voucher"></div>
+        </div>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script type="text/javascript" src="parking_meter.js"></script>
+    </div>
+</body>
+</html>
