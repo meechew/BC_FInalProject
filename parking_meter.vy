@@ -11,26 +11,25 @@ struct ParkingVoucher:
 
 
 Owner: public(address)
-Balance: uint256
 
 # minimum voucher order
 VOUCHMIN: constant(uint256) = 1000000000000000
 
 # index of vouchers
-VoucherDex: public(address[ParkingVoucher])
+VoucherDex: public(HashMap[address, ParkingVoucher])
 
-Validated: event({ValidTill: uint256, For: indexed(address)}) 
+event Validated:
+    ValidTill: uint256
+    VoucherFor: indexed(address)
 
 @external
 def __init__():
     self.Owner = msg.sender
-    self.Balance = 0
 
 
 @internal
-def WeiForTime() -> uint256(Sec):
-    Sec: uint256
-    Sec = msg.value * 900 / VOUCHMIN
+def WeiForTime(val: uint256) -> uint256:
+    Sec: uint256 = val * 900 / VOUCHMIN
     return Sec
 
 
@@ -41,15 +40,14 @@ def PurchaseVoucher(name: String[32], email: String[32], plate: String[8]):
     self.VoucherDex[msg.sender].name = name
     self.VoucherDex[msg.sender].email = email
     self.VoucherDex[msg.sender].plate = plate
-    self.VoucherDex[msg.sender].expires = block.timestamp + WeiForTime()
-    log.Validated(self.VoucherDex[msg.sender].expires ,msg.sender)
+    self.VoucherDex[msg.sender].expires = block.timestamp + self.WeiForTime(msg.value)
+    log Validated(self.VoucherDex[msg.sender].expires ,msg.sender)
 
 
 @external
 def Withdraw():
-    assert msg.sender == Owner, "This address cannot withdraw."
-    send(self.Owner, self.Balance)
-    self.Balance = 0
+    assert msg.sender == self.Owner, "This address cannot withdraw."
+    send(self.Owner, self.balance)
 
 
 @external
