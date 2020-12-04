@@ -3,7 +3,6 @@
 # Parking voucher structure
 
 struct ParkingVoucher:
-    #wallet: address
     name: String[32]
     email: String[32]
     plate: String[8]
