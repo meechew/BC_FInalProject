@@ -16,7 +16,7 @@ var ParkingMeterABI = [{"name": "Validated", "inputs": [{"type": "uint256", "nam
 var ParkingMeter = new web3.eth.Contract(ParkingMeterABI, '0x4446A1f42aC5B25986D33dBAB3aCE0bda3685c0a');
 
 /* Purchase a parking voucher using the fields provided. */
-async function purchease() {
+async function Purchease() {
     const Accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const Account = Accounts[0];
     const Name = document.getElementById("name").value;
@@ -66,7 +66,7 @@ async function LookUpWallet() {
 
 const PurchaseBtn = document.getElementById('purchase');
 PurchaseBtn.addEventListener('click', () => {
-    purchease();
+    Purchease();
 });
 
 const LookUpBtn = document.getElementById('LookUpWallet');
