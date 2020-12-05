@@ -37,24 +37,26 @@
                         <option value="7200">2:00</option>
                     </optgroup>
                 </select>
-                <div>0.001 Eth for 15 minutes. 2 hour max.</div>
+                0.001 Eth for 15 minutes. 2 hour max.
             </div>
             <button id="purchase">Purchase</button>
         </div>
         <h2>Look Up Voucher</h2>
         <div>
             <button id="LookUpWallet">Look Up Wallet</button>
+            <!--
             <div>
                 <label for="PlateLookUp">Plate Number: </label>
                 <input id="PlateLookUp" type="text" name="plate look up">
             </div>
             <button id="LookUpPlate">Look up plate</button>
+            -->
             <div id="voucher"></div>
         </div>
         <div id="ReturnLookUp"></div>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
         <script type="text/javascript" src="parking_meter.js"></script>
-        <script>
+        <script type="text/javascript">
             Purchease();
             LookUpWallet();
         </script>

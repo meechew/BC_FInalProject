@@ -36,7 +36,8 @@ async function Purchease() {
 
 async function LookUpWallet() {
     const ReturnLockUp = document.getElementById("ReturnLookUp");
-    ReturnLockUp.firstChild.remove();
+    if (ReturnLockUp.firstChild)
+        ReturnLockUp.firstChild.remove();
     const Accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const Account = Accounts[0];
 
