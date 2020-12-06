@@ -15,7 +15,9 @@ Owner: public(address)
 VOUCHMIN: constant(uint256) = 1000000000000000
 
 # index of vouchers
-VoucherDex: public(HashMap[address, ParkingVoucher])
+VoucherByAdd: public(HashMap[address, ParkingVoucher])
+VoucherByPlt: public(HashMap[String[8], ParkingVoucher])
+
 
 event Validated:
     ValidTill: uint256
@@ -36,11 +38,18 @@ def WeiForTime(val: uint256) -> uint256:
 @payable
 def PurchaseVoucher(name: String[32], email: String[32], plate: String[8]):
     assert msg.value >= VOUCHMIN, "insufficient funds"
-    self.VoucherDex[msg.sender].name = name
-    self.VoucherDex[msg.sender].email = email
-    self.VoucherDex[msg.sender].plate = plate
-    self.VoucherDex[msg.sender].expires = block.timestamp + self.WeiForTime(msg.value)
-    log Validated(self.VoucherDex[msg.sender].expires ,msg.sender)
+    assert msg.value <= VOUCHMIN * 8, "2 Hour limit"
+    expr: uint256 = block.timestamp + self.WeiForTime(msg.value)
+    if self.VoucherByAdd[msg.sender].expires > block.timestamp:
+       assert self.VoucherByAdd[msg.sender].expires + expr <= block.timestamp + 7200, "2 Hour limit"
+       self.VoucherByAdd[msg.sender].expires += expr
+    else:
+        self.VoucherByAdd[msg.sender].expires = expr
+    self.VoucherByAdd[msg.sender].name = name
+    self.VoucherByAdd[msg.sender].email = email
+    self.VoucherByAdd[msg.sender].plate = plate
+    self.VoucherByPlt[plate] = self.VoucherByAdd[msg.sender]
+    log Validated(self.VoucherByAdd[msg.sender].expires ,msg.sender)
 
 
 @external
