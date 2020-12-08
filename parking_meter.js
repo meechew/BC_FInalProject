@@ -78,7 +78,7 @@ async function LookUpPlate() {
     const ReturnLockUp = document.getElementById("ReturnLookUp");
     if (ReturnLockUp.firstChild)
         ReturnLockUp.firstChild.remove();
-    const PlateLookUp = document.getElementById('PlateLookUp')
+    const PlateLookUp = document.getElementById('PlateLookUp').value;
 
     var Returned = await ParkingMeter.methods.VoucherByPlt(PlateLookUp).call();
 
