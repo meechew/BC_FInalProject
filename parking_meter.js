@@ -21,7 +21,7 @@ async function Purchease() {
     const Account = Accounts[0];
     const Name = document.getElementById("name").value;
     const Email = document.getElementById("email").value;
-    const Plate = document.getElementById("PlateNumber").value;
+    const Plate = document.getElementById("PlateNumber").value.toUpperCase();
     const Time = document.getElementById("time").value;
 
 
@@ -78,7 +78,7 @@ async function LookUpPlate() {
     const ReturnLockUp = document.getElementById("ReturnLookUp");
     if (ReturnLockUp.firstChild)
         ReturnLockUp.firstChild.remove();
-    const PlateLookUp = document.getElementById('PlateLookUp').value;
+    const PlateLookUp = document.getElementById('PlateLookUp').value.toUpperCase();
 
     var Returned = await ParkingMeter.methods.VoucherByPlt(PlateLookUp).call();
 
