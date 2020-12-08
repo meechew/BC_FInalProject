@@ -43,6 +43,15 @@ async function LookUpWallet() {
 
     var Returned = await ParkingMeter.methods.VoucherByAdd(Account).call();
 
+    if (Returned.expires == 0) {
+	const p = document.createElement("p");
+	const Failed = document.createTextNode("No records found");
+	p.appendChild(Failed);
+	p.classList.add("ReturnLookUp");
+	ReturnLockUp.appendChild(p);
+	return;
+    }
+    
     const Name = document.createTextNode("Name: " + Returned.name);
     const Email = document.createTextNode("Email: " + Returned.email);
     const Plate = document.createTextNode("Plate: " + Returned.plate);
@@ -72,6 +81,15 @@ async function LookUpPlate() {
     const PlateLookUp = document.getElementById('PlateLookUp')
 
     var Returned = await ParkingMeter.methods.VoucherByPlt(PlateLookUp).call();
+
+    if (Returned.expires == 0) {
+        const p = document.createElement("p");
+        const Failed = document.createTextNode("No records found");
+        p.appendChild(Failed);
+        p.classList.add("ReturnLookUp");
+        ReturnLockUp.appendChild(p);
+        return;
+    }
 
     const Name = document.createTextNode("Name: " + Returned.name);
     const Email = document.createTextNode("Email: " + Returned.email);
