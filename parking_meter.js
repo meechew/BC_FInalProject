@@ -13,7 +13,7 @@ const VOUCHMIN = 1000000000000000;
 
 var ParkingMeterABI = [{"name":"Validated","inputs":[{"type":"uint256","name":"ValidTill","indexed":false},{"type":"address","name":"VoucherFor","indexed":true}],"anonymous":false,"type":"event"},{"outputs":[],"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"name":"PurchaseVoucher","outputs":[],"inputs":[{"type":"string","name":"name"},{"type":"string","name":"email"},{"type":"string","name":"plate"}],"stateMutability":"payable","type":"function","gas":510922},{"name":"Withdraw","outputs":[],"inputs":[],"stateMutability":"nonpayable","type":"function","gas":36896},{"stateMutability":"payable","type":"fallback"},{"name":"Owner","outputs":[{"type":"address","name":""}],"inputs":[],"stateMutability":"view","type":"function","gas":1241},{"name":"VoucherByAdd","outputs":[{"type":"string","name":"name"},{"type":"string","name":"email"},{"type":"string","name":"plate"},{"type":"uint256","name":"expires"}],"inputs":[{"type":"address","name":"arg0"}],"stateMutability":"view","type":"function","gas":21079},{"name":"VoucherByPlt","outputs":[{"type":"string","name":"name"},{"type":"string","name":"email"},{"type":"string","name":"plate"},{"type":"uint256","name":"expires"}],"inputs":[{"type":"string","name":"arg0"}],"stateMutability":"view","type":"function","gas":21192}];
 
-var ParkingMeter = new web3.eth.Contract(ParkingMeterABI, '0x37038E8991B7AA58E28596ccaEd8c80CA01aEDF5');
+var ParkingMeter = new web3.eth.Contract(ParkingMeterABI, '0xff9be30721386847aBc78fdfBdbeaeE785B0445d');
 
 /* Purchase a parking voucher using the fields provided. */
 async function Purchease() {

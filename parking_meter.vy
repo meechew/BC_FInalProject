@@ -41,8 +41,9 @@ def PurchaseVoucher(name: String[32], email: String[32], plate: String[8]):
     assert msg.value <= VOUCHMIN * 8, "2 Hour limit"
     expr: uint256 = block.timestamp + self.WeiForTime(msg.value)
     if self.VoucherByPlt[plate].expires > block.timestamp:
-       assert self.VoucherByPlt[plate].expires + expr >= block.timestamp + 7200, "2 Hour limit"
-       self.VoucherByPlt[plate].expires += expr
+        expr += self.VoucherByPlt[plate].expires - block.timestamp
+        assert expr <= block.timestamp + 7200, "2 Hour limit"
+        self.VoucherByPlt[plate].expires = expr
     else:
         self.VoucherByPlt[plate].expires = expr
     self.VoucherByPlt[plate].name = name
@@ -56,6 +57,12 @@ def PurchaseVoucher(name: String[32], email: String[32], plate: String[8]):
 def Withdraw():
     assert msg.sender == self.Owner, "This address cannot withdraw."
     send(self.Owner, self.balance)
+
+
+@external
+def SelDestruct():
+    assert msg.sender == self.Owner, "This address cannot initiate selfdestruction."
+    selfdestruct(self.Owner)
 
 
 @external
