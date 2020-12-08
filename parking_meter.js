@@ -44,12 +44,12 @@ async function LookUpWallet() {
     var Returned = await ParkingMeter.methods.VoucherByAdd(Account).call();
 
     if (Returned.expires == 0) {
-	const p = document.createElement("p");
-	const Failed = document.createTextNode("No records found");
-	p.appendChild(Failed);
-	p.classList.add("ReturnLookUp");
-	ReturnLockUp.appendChild(p);
-	return;
+        const p = document.createElement("p");
+        const Failed = document.createTextNode("NO RECORDS FOUND");
+        p.appendChild(Failed);
+        p.classList.add("ReturnLookUp");
+        ReturnLockUp.appendChild(p);
+        return;
     }
     
     const Name = document.createTextNode("Name: " + Returned.name);
@@ -84,7 +84,7 @@ async function LookUpPlate() {
 
     if (Returned.expires == 0) {
         const p = document.createElement("p");
-        const Failed = document.createTextNode("No records found");
+        const Failed = document.createTextNode("NO RECORDS FOUND");
         p.appendChild(Failed);
         p.classList.add("ReturnLookUp");
         ReturnLockUp.appendChild(p);
