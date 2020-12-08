@@ -65,12 +65,48 @@ async function LookUpWallet() {
     ReturnLockUp.appendChild(p);
 }
 
+async function LookUpPlate() {
+    const ReturnLockUp = document.getElementById("ReturnLookUp");
+    if (ReturnLockUp.firstChild)
+        ReturnLockUp.firstChild.remove();
+    const PlateLookUp = document.getElementById('PlateLookUp')
+
+    var Returned = await ParkingMeter.methods.VoucherByPlt(PlateLookUp).call();
+
+    const Name = document.createTextNode("Name: " + Returned.name);
+    const Email = document.createTextNode("Email: " + Returned.email);
+    const Plate = document.createTextNode("Plate: " + Returned.plate);
+    const Expires_D = new Date(parseInt(Returned.expires) * 1000);
+    const Expires = document.createTextNode("Expires: " + Expires_D.toLocaleTimeString());
+
+    const p = document.createElement("p");
+    p.classList.add("ReturnLookUp");
+    p.appendChild(Name);
+    const Br1 = document.createElement("br");
+    p.appendChild(Br1);
+    p.appendChild(Email);
+    const Br2 = document.createElement("br");
+    p.appendChild(Br2);
+    p.appendChild(Plate);
+    const Br3 = document.createElement("br");
+    p.appendChild(Br3);
+    p.appendChild(Expires);
+
+    ReturnLockUp.appendChild(p);
+}
+
+
 const PurchaseBtn = document.getElementById('purchase');
 PurchaseBtn.addEventListener('click', () => {
     Purchease();
 });
 
-const LookUpBtn = document.getElementById('LookUpWallet');
-LookUpBtn.addEventListener('click', () =>{
+const LookUpWalletBtn = document.getElementById('LookUpWalletBtn');
+LookUpWalletBtn.addEventListener('click', () => {
     LookUpWallet();
+});
+
+const LookUpPlateBtn = document.getElementById('LookUpPlateBtn');
+LookUpPlateBtn.addEventListener('click', () => {
+    LookUpPlate();
 });
